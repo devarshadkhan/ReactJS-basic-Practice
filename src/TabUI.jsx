@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TabSecton } from "./store/slices/TabSlice";
+import { TabPanel } from "./utils/MockData";
 
 const TabUI = () => {
   const dispatch = useDispatch();
@@ -10,11 +11,14 @@ const TabUI = () => {
   };
   return (
     <>
-      <button onClick={() => handleClick(0)}>Tab 1</button>
-      <button onClick={() => handleClick(1)}>Tab 2</button>
-
-      {store === 0 && <p>Tab 1</p>}
-      {store === 1 && <p>Tab 2</p>}
+      {TabPanel.map((item) => {
+        return (
+          <>
+            <button onClick={() => handleClick(item.id)}>{item.label}</button>
+            <p>{store === item.id && item.content}</p>
+          </>
+        );
+      })}
     </>
   );
 };
